@@ -41,6 +41,7 @@
 #include "templates/flashcard/flashcardentrypoint.h"
 #include "templates/mlearning/basicmlearningentrypoint.h"
 #include "templates/learnspellings/learnspellingsentrypoint.h"
+#include "templates/piccollection/piccollectionentrypoint.h"
 
 #if QT_VERSION >= 0x050000
 #include <QStandardPaths>
@@ -316,6 +317,9 @@ void TemplateFactory::setupTemplates() {
 
   TemplateEntryPoint *learnspellings_entry = new LearnSpellingsEntryPoint(this);
   m_availableTemplates.insert(learnspellings_entry->typeIndentifier(), learnspellings_entry);
+  
+  TemplateEntryPoint *piccollection_entry = new PicCollectionEntryPoint(this);
+  m_availableTemplates.insert(piccollection_entry->typeIndentifier(), piccollection_entry);
 }
 
 TemplateGenerator *TemplateFactory::generator() const {

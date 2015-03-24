@@ -446,6 +446,14 @@ set(APP_SOURCES
   src/templates/learnspellings/learnspellingseditor.cpp
   src/templates/learnspellings/learnspellingssimulator.cpp
   src/templates/learnspellings/learnspellingsitem.cpp
+  
+  src/templates/piccollection/piccollectionentrypoint.cpp
+  src/templates/piccollection/piccollectioncore.cpp
+  src/templates/piccollection/piccollectioneditor.cpp
+  src/templates/piccollection/piccollectionsimulator.cpp
+  src/templates/piccollection/piccollectionimage.cpp
+  src/templates/piccollection/piccollectionitem.cpp
+  src/templates/piccollection/piccollectionthumbnail.cpp
 
   src/main.cpp
 )
@@ -514,6 +522,13 @@ set(APP_HEADERS
   src/templates/learnspellings/learnspellingscore.h
   src/templates/learnspellings/learnspellingseditor.h
   src/templates/learnspellings/learnspellingssimulator.h
+  
+  src/templates/piccollection/piccollectionentrypoint.h
+  src/templates/piccollection/piccollectioncore.h
+  src/templates/piccollection/piccollectioneditor.h
+  src/templates/piccollection/piccollectionsimulator.h
+  src/templates/piccollection/piccollectionitem.h
+  src/templates/piccollection/piccollectionthumbnail.h
 )
 
 # APP form files.
@@ -540,6 +555,10 @@ set(APP_FORMS
 
   src/templates/learnspellings/learnspellingseditor.ui
   src/templates/learnspellings/learnspellingssimulator.ui
+  
+  src/templates/piccollection/piccollectioneditor.ui
+  src/templates/piccollection/piccollectionsimulator.ui
+  src/templates/piccollection/piccollectionitem.ui
 )
 
 # APP translations.
