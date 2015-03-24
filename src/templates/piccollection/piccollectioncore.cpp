@@ -61,9 +61,9 @@ TemplateCore::GenerationResult PicCollectionCore::generateMobileApplication(cons
   emit generationProgress(10, tr("Extracting raw data from editor..."));
 
   // We need data which will be imported into apk/zip file.
-  QString quiz_data = editor()->generateBundleData();
+  QString pic_data = editor()->generateBundleData();
 
-  if (quiz_data.isEmpty()) {
+  if (pic_data.isEmpty()) {
     // No date received, this is big problem.
     return BundleProblem;
   }
@@ -85,7 +85,7 @@ TemplateCore::GenerationResult PicCollectionCore::generateMobileApplication(cons
   emit generationProgress(30, tr("Writting info data into file..."));
 
   QTextStream out(&index_file);
-  out << quiz_data;
+  out << pic_data;
 
   out.flush();
   index_file.close();
