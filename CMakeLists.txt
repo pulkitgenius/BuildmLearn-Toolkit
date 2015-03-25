@@ -453,7 +453,8 @@ set(APP_SOURCES
   src/templates/piccollection/piccollectionsimulator.cpp
   src/templates/piccollection/piccollectionimage.cpp
   src/templates/piccollection/piccollectionitem.cpp
-  src/templates/piccollection/piccollectionthumbnail.cpp
+  src/templates/piccollection/labelwithclick.cpp
+  src/templates/piccollection/slidingstackedwidget.cpp
 
   src/main.cpp
 )
@@ -528,7 +529,8 @@ set(APP_HEADERS
   src/templates/piccollection/piccollectioneditor.h
   src/templates/piccollection/piccollectionsimulator.h
   src/templates/piccollection/piccollectionitem.h
-  src/templates/piccollection/piccollectionthumbnail.h
+  src/templates/piccollection/labelwithclick.h
+  src/templates/piccollection/slidingstackedwidget.h
 )
 
 # APP form files.

@@ -35,7 +35,6 @@
 
 PicCollectionItem::PicCollectionItem(QWidget *parent) : QWidget(parent), m_ui(new Ui::PicCollectionItem) {
   m_ui->setupUi(this);
-  m_ui->m_lblPicture->setFixedHeight((int) (SIMULATOR_CONTENTS_HEIGHT * 0.4));
 
   QFont caption_font = m_ui->m_lblImageNumber->font();
   caption_font.setPointSize(caption_font.pointSize() + SIMULATOR_HEADER_SIZE_INCREASE);
@@ -51,11 +50,22 @@ PicCollectionItem::~PicCollectionItem() {
 }
 
 void PicCollectionItem::setImage(const PicCollectionImage &image, int image_number, int total_images) {
-  m_ui->m_btnPrevious->setEnabled(image_number != 1);
-  m_ui->m_btnNext->setEnabled(image_number != total_images);
-  m_ui->m_lblImageNumber->setText(tr("Image number %1 of %2").arg(QString::number(image_number),
+  m_ui->m_btnPrevious->setEnabled(total_images != 1);
+  m_ui->m_btnNext->setEnabled(total_images != 1);
+  m_ui->m_lblImageNumber->setText(tr("%1 / %2").arg(QString::number(image_number),
                                                                         QString::number(total_images)));
   m_ui->m_lblImageTitle->setText(image.title());
   m_ui->m_lblDescription->setText(image.description());
-  m_ui->m_lblPicture->setPixmap(QPixmap(image.picturePath()).scaled(m_ui->m_lblPicture->size(), Qt::KeepAspectRatio));
+  
+  QPixmap Image(image.picturePath());
+  
+  int picHeight = (int) (SIMULATOR_CONTENTS_HEIGHT * 0.7);
+  int picWidth = (int) (SIMULATOR_CONTENTS_WIDTH * 0.9);
+  
+  if (Image.width()/Image.height() > picWidth/picHeight)
+    m_ui->m_lblPicture->setPixmap(Image.scaledToWidth(picWidth));//, Qt::KeepAspectRatio));
+  else
+    m_ui->m_lblPicture->setPixmap(Image.scaledToHeight(picHeight));//, Qt::KeepAspectRatio));
+  
+  //m_ui->m_lblPicture->setPixmap(Image.scaled(m_ui->m_lblPicture->size(), Qt::KeepAspectRatio));
 }

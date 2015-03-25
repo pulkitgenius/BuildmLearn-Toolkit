@@ -28,24 +28,27 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "templates/piccollection/piccollectionthumbnail.h"
-#include "definitions/definitions.h"
+#ifndef LABELWITHCLICK_H
+#define LABELWITHCLICK_H
+
+#include <QLabel>
+
+class LabelWithClick : public QLabel {	 
+	Q_OBJECT
+	 
+  public:
+	explicit LabelWithClick(int index);
+	~LabelWithClick();
+    
+  signals:
+	void clicked(int no = 0);
+ 
+  protected:
+	void mousePressEvent (QMouseEvent *event) ;
+	
+  private:
+    int m_no;
+};
 
 
-PicCollectionThumbnail::PicCollectionThumbnail(int index) : QLabel() {
-  m_thumbNo = index;	
-  setMaximumHeight(SIMULATOR_CONTENTS_HEIGHT * 0.26);
-  setMaximumWidth(SIMULATOR_CONTENTS_WIDTH * 0.26);
-}
- 
-PicCollectionThumbnail::~PicCollectionThumbnail() {
-}
- 
-//int PicCollectionThumbnail::thumbNo() const {
-	//return m_thumbNo;
-//} 
- 
-void PicCollectionThumbnail::mousePressEvent ( QMouseEvent * event ) {
-  Q_UNUSED(event);	
-  emit thumbnailClicked(m_thumbNo);
-}
+#endif // LABELWITHCLICK_H

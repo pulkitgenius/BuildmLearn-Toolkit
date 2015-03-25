@@ -33,7 +33,7 @@
 #include "core/templatecore.h"
 #include "templates/piccollection/piccollectioneditor.h"
 #include "templates/piccollection/piccollectionitem.h"
-#include "templates/piccollection/piccollectionthumbnail.h"
+#include "templates/piccollection/labelwithclick.h"
 #include "definitions/definitions.h"
 #include "miscellaneous/application.h"
 #include "miscellaneous/skinfactory.h"
@@ -99,8 +99,10 @@ bool PicCollectionSimulator::startSimulation() {
     //For thumbnails
     int thumbNo = m_ui->m_phoneWidget->count() - 4;
     
-    PicCollectionThumbnail *thumbnailpic = new PicCollectionThumbnail(thumbNo);
-    connect(thumbnailpic, SIGNAL(thumbnailClicked(int)), this, SLOT(goToSelectedImage(int)));
+    LabelWithClick *thumbnailpic = new LabelWithClick(thumbNo);
+    connect(thumbnailpic, SIGNAL(clicked(int)), this, SLOT(goToSelectedImage(int)));
+    thumbnailpic->setMaximumHeight((int) (SIMULATOR_CONTENTS_HEIGHT * 0.27));
+	thumbnailpic->setMaximumWidth((int) (SIMULATOR_CONTENTS_WIDTH * 0.27));
     
     QSpacerItem *spacer = new QSpacerItem(1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding);	
     m_ui->m_gallery->insertItem(-1, spacer);
@@ -137,7 +139,7 @@ bool PicCollectionSimulator::stopSimulation() {
 }
 
 void PicCollectionSimulator::goToSelectedImage(int thumbNo) {
-  m_ui->m_phoneWidget->setCurrentIndex(thumbNo + 3);
+  m_ui->m_phoneWidget->slideInIdx(thumbNo + 3);
 }
 
 void PicCollectionSimulator::clearLayout(QLayout* layout) {
@@ -159,13 +161,21 @@ void PicCollectionSimulator::start() {
 }
 
 void PicCollectionSimulator::moveToNextImage() {
-  m_ui->m_phoneWidget->setCurrentIndex(m_ui->m_phoneWidget->currentIndex() + 1);
+  //m_ui->m_phoneWidget->setCurrentIndex(m_ui->m_phoneWidget->currentIndex() + 1);
+  if (m_ui->m_phoneWidget->currentIndex() == m_ui->m_phoneWidget->count() - 1)
+	m_ui->m_phoneWidget->slideInIdx(3);
+  else
+	m_ui->m_phoneWidget->slideInNext();
 }
 
 void PicCollectionSimulator::moveToPreviousImage() {
-  m_ui->m_phoneWidget->setCurrentIndex(m_ui->m_phoneWidget->currentIndex() - 1);
+  //m_ui->m_phoneWidget->setCurrentIndex(m_ui->m_phoneWidget->currentIndex() - 1);
+  if (m_ui->m_phoneWidget->currentIndex() == 3)
+	m_ui->m_phoneWidget->slideInIdx(m_ui->m_phoneWidget->count() - 1);
+  else
+	m_ui->m_phoneWidget->slideInPrev();
 }
 
 void PicCollectionSimulator::moveToGallery() {
-  m_ui->m_phoneWidget->setCurrentIndex(2);
+  m_ui->m_phoneWidget->slideInIdx(2);
 }

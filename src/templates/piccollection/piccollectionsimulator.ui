@@ -27,7 +27,7 @@
     <number>5</number>
    </property>
    <item>
-    <widget class="QStackedWidget" name="m_phoneWidget">
+    <widget class="SlidingStackedWidget" name="m_phoneWidget">
      <property name="currentIndex">
       <number>0</number>
      </property>
@@ -234,6 +234,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>SlidingStackedWidget</class>
+   <extends>QStackedWidget</extends>
+   <header>templates/piccollection/slidingstackedwidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
