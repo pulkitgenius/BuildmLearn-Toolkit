@@ -59,8 +59,32 @@ class PicCollectionItem : public QWidget {
     void nextImageRequested();
     void galleryRequested();
     void previousImageRequested();
+    
+  private slots:
+    void imageClicked();
+    void scaleAnim();
+    void rotateAnim();
+    void scaleAfterRotation();
+    void rotateAfterScale();
+    void showItemsAfterRotate();
 
   private:
+    void rotateImage(int angle);
+    void scaleImage(int scaleWidth, int scaleHeight, bool anim = true);
+    QPixmap m_image;
+    QPixmap m_imageSmall;
+    int m_picHeightUnclicked;
+    int m_picWidthUnclicked;
+    int m_picHeightClicked;
+    int m_picWidthClicked;
+    int m_picWidth;
+    int m_picHeight;
+    int m_scaleWidth;
+    int m_scaleHeight;
+    int m_angle;
+    int m_startAngle;
+    bool m_rotationNeeded;
+    bool m_rotation;
     Ui::PicCollectionItem *m_ui;
 };
 

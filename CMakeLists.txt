@@ -118,7 +118,6 @@
 
 # Setup basic variables.
 project(buildmlearn-toolkit)
-
 set(APP_NAME "BuildmLearn Toolkit")
 set(APP_LOW_NAME "buildmlearn-toolkit")
 set(APP_VERSION "2.0.4")

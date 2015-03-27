@@ -37,7 +37,7 @@ class LabelWithClick : public QLabel {
 	Q_OBJECT
 	 
   public:
-	explicit LabelWithClick(int index);
+	explicit LabelWithClick(QWidget * parent = 0, int index = 0, const QString& text ="");
 	~LabelWithClick();
     
   signals:

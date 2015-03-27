@@ -32,7 +32,8 @@
 #include "definitions/definitions.h"
 
 
-LabelWithClick::LabelWithClick(int index) : QLabel() {
+LabelWithClick::LabelWithClick(QWidget *parent, int index, const QString& text) : QLabel(parent) {
+  setText(text);	
   m_no = index;	
 }
  

@@ -374,11 +374,11 @@ void PicCollectionEditor::addImage(const QString &title,
 }
 
 void PicCollectionEditor::addImage() {
-  addImage(tr("Cat"),
-              tr("This animal is hated by dog."),
+  addImage(tr("White Roses"),
+              tr("This is a white rose."),
               APP_TEMPLATES_PATH + QDir::separator() +
               core()->entryPoint()->baseFolder() + QDir::separator() +
-              "cat.png");
+              "whiteRoses.png");
   launch();
   emit changed();
 }

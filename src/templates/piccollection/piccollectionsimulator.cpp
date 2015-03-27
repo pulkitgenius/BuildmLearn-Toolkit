@@ -99,7 +99,7 @@ bool PicCollectionSimulator::startSimulation() {
     //For thumbnails
     int thumbNo = m_ui->m_phoneWidget->count() - 4;
     
-    LabelWithClick *thumbnailpic = new LabelWithClick(thumbNo);
+    LabelWithClick *thumbnailpic = new LabelWithClick(0, thumbNo);
     connect(thumbnailpic, SIGNAL(clicked(int)), this, SLOT(goToSelectedImage(int)));
     thumbnailpic->setMaximumHeight((int) (SIMULATOR_CONTENTS_HEIGHT * 0.27));
 	thumbnailpic->setMaximumWidth((int) (SIMULATOR_CONTENTS_WIDTH * 0.27));
@@ -117,8 +117,11 @@ bool PicCollectionSimulator::startSimulation() {
 	}
 	else if (thumbNo%3 == 1) 
 		hlayout->insertWidget(1,thumbnailpic);
-	else 
+	else {
 		hlayout->insertWidget(2,thumbnailpic);
+		QSpacerItem *spacer = new QSpacerItem(1, 1, QSizePolicy::Expanding, QSizePolicy::Minimum);
+		hlayout->insertItem(0,spacer);
+	}
 		
     thumbnailpic->setPixmap(QPixmap(image.picturePath()).scaled(thumbnailpic->size(), Qt::KeepAspectRatio));
   }
