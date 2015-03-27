@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2012, BuildmLearn Contributors listed at http://buildmlearn.org/people/
+  Copyright (c) 2015, BuildmLearn Contributors listed at http://buildmlearn.org/people/
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
@@ -32,14 +32,13 @@
 
 #include "definitions/definitions.h"
 #include <QTimer> 
-#include <iostream>
 
 PicCollectionItem::PicCollectionItem(QWidget *parent) : QWidget(parent), m_ui(new Ui::PicCollectionItem) {
   m_ui->setupUi(this);
 
   m_picHeightUnclicked = (int) (SIMULATOR_CONTENTS_HEIGHT * 0.5);
   m_picWidthUnclicked = (int) (SIMULATOR_CONTENTS_WIDTH * 0.90);
-  m_picHeightClicked = (int) (SIMULATOR_CONTENTS_HEIGHT * 0.90);
+  m_picHeightClicked = (int) (SIMULATOR_CONTENTS_HEIGHT * 0.95);
   m_picWidthClicked = (int) (SIMULATOR_CONTENTS_WIDTH * 0.95);
   m_rotationNeeded = false;
   m_ui->m_lblImageTitle->setFixedHeight(((int) (SIMULATOR_CONTENTS_HEIGHT * 0.125))+1);
@@ -109,21 +108,13 @@ void PicCollectionItem::imageClicked()
 			m_ui->m_lblImageNumber->setVisible(false);
 			m_ui->m_line->setVisible(false);
 			m_ui->m_lblImageTitle->setVisible(false);
-			//m_ui->m_lblDummy->setVisible(false);
 			m_ui->m_lblDescription->setVisible(false);
 			m_ui->m_btnNext->setVisible(false);
 			m_ui->m_btnPrevious->setVisible(false);
 			m_ui->m_btnGallery->setVisible(false);
-			std::cout<<"Inside if\n";
-			//scaleImage(m_picWidthUnclicked, m_picHeightUnclicked, false);
-			if (m_rotationNeeded) {
-				//m_startAngle = 0;
+			if (m_rotationNeeded) 
 				rotateImage(90);
-				
-				//scaleImage(m_picWidthUnclicked, m_picHeightUnclicked, false);
-			}
 			scaleAfterRotation();
-			//scaleImage(m_picWidthClicked, m_picHeightClicked);
 		}
 		else {
 			scaleImage(m_picWidthUnclicked, m_picHeightUnclicked);
@@ -133,9 +124,6 @@ void PicCollectionItem::imageClicked()
 }
 
 void PicCollectionItem::rotateImage(int angle) {
-  //QTransform transform;
-  //m_image = m_image.transformed(transform.rotate(angle));
-  //m_ui->m_lblPicture->setPixmap(m_image));
   m_angle = angle;
   m_startAngle = 0;
   rotateAnim();
@@ -145,20 +133,10 @@ void PicCollectionItem::rotateAnim() {
 	static int test = 0;
   test+=1;
   
-  if (m_startAngle != m_angle) {// && test<20) {
+  if (m_startAngle != m_angle) {
 		QTransform transform;
 		m_startAngle = m_angle>m_startAngle ? m_startAngle+1:m_startAngle-1;
-		//m_image = m_image.transformed(transform.rotate(m_startAngle));
-		//m_imageSmall = m_imageSmall.transformed(transform.rotate(m_angle));
-		//scaleImage(m_picWidthUnclicked, m_picHeightUnclicked, false);
 		m_ui->m_lblPicture->setPixmap(m_imageSmall.transformed(transform.rotate(m_startAngle)));
-		/*std::cout<<"Inside rotateAnim, ";
-		std::cout<<test;
-		std::cout<<", ";
-		std::cout<<m_startAngle;
-		std::cout<<":";
-		std::cout<<m_angle;
-		std::cout<<"\n";*/
 		QTimer::singleShot(1, this, SLOT(rotateAnim()));
 	}
 	else {
@@ -194,7 +172,6 @@ void PicCollectionItem::showItemsAfterRotate() {
 		m_ui->m_lblImageNumber->setVisible(true);
 		m_ui->m_line->setVisible(true);
 		m_ui->m_lblImageTitle->setVisible(true);
-		//m_ui->m_lblDummy->setVisible(true);
 		m_ui->m_lblDescription->setVisible(true);
 		m_ui->m_btnNext->setVisible(true);
 		m_ui->m_btnPrevious->setVisible(true);
@@ -204,44 +181,6 @@ void PicCollectionItem::showItemsAfterRotate() {
 		QTimer::singleShot(50, this, SLOT(showItemsAfterRotate()));
 }
 	
-/*  if (m_picWidth == m_scaleWidth ||	m_picHeight == m_scaleHeight) {
-		std::cout<<"Inside showItems\n";
-		if (m_rotationNeeded) {// && m_rotation) {
-			std::cout<<"Inside if of showItems\n";
-			//m_rotation = false;
-			rotateImage(0);
-			//scaleImage(m_picWidthUnclicked, m_picHeightUnclicked, false);
-			if (m_startAngle == m_angle) {
-				std::cout<<"Inside if if of showItems\n";
-				m_ui->m_container->setStyleSheet("");
-				m_ui->m_lblImageNumber->setVisible(true);
-				m_ui->m_line->setVisible(true);
-				m_ui->m_lblImageTitle->setVisible(true);
-				//m_ui->m_lblDummy->setVisible(true);
-				m_ui->m_lblDescription->setVisible(true);
-				m_ui->m_btnNext->setVisible(true);
-				m_ui->m_btnPrevious->setVisible(true);
-				m_ui->m_btnGallery->setVisible(true);
-			}
-			else
-				QTimer::singleShot(50, this, SLOT(showItems()));
-		}
-		else if (!m_rotationNeeded) {
-			m_ui->m_container->setStyleSheet("");
-			m_ui->m_lblImageNumber->setVisible(true);
-			m_ui->m_line->setVisible(true);
-			m_ui->m_lblImageTitle->setVisible(true);
-			//m_ui->m_lblDummy->setVisible(true);
-			m_ui->m_lblDescription->setVisible(true);
-			m_ui->m_btnNext->setVisible(true);
-			m_ui->m_btnPrevious->setVisible(true);
-			m_ui->m_btnGallery->setVisible(true);
-		}
-	}
-	else
-		QTimer::singleShot(50, this, SLOT(showItems()));
-}*/
-
 void PicCollectionItem::scaleImage(int scaleWidth, int scaleHeight, bool anim) {
 	
 	if (anim) {
@@ -273,17 +212,5 @@ void PicCollectionItem::scaleAnim() {
 			m_ui->m_lblPicture->setPixmap(m_image.scaledToHeight(m_picHeight));
 		}
 		QTimer::singleShot(m_rotationNeeded ? 1:2, this, SLOT(scaleAnim()));
-		/*std::cout<<"Inside ScaleAnim, ";
-		std::cout<<test;
-		std::cout<<", ";
-		std::cout<<m_picWidth;
-		std::cout<<":";
-		std::cout<<m_scaleWidth;
-		std::cout<<", ";
-		std::cout<<m_picHeight;
-		std::cout<<":";
-		std::cout<<m_scaleHeight;
-		std::cout<<"\n";*/
 	}
-  //std::cout<<"ScaleAnim done\n";
 }

@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2012, BuildmLearn Contributors listed at http://buildmlearn.org/people/
+  Copyright (c) 2015, BuildmLearn Contributors listed at http://buildmlearn.org/people/
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
@@ -48,6 +48,12 @@ PicCollectionSimulator::PicCollectionSimulator(TemplateCore *core, QWidget *pare
   caption_font.setPointSize(caption_font.pointSize() + SIMULATOR_HEADING_SIZE_INCREASE);
   m_ui->m_lblHeading->setFont(caption_font);
 
+  QString style = "QPushButton{min-height:1.5em; font:1em; margin:0 1px 0 1px; color: white;\
+					   background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #ff3232, stop: 1 #e50000);\
+					   border-style: outset;border-radius: 3px; border-width: 1px; border-color: #ff0000;}\
+					   QPushButton:pressed {background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #e50000, stop: 1 #ff3232);}";
+  
+  m_ui->m_btnStart->setStyleSheet(style);
   connect(m_ui->m_btnStart, SIGNAL(clicked()), this, SLOT(start()));
 }
 
@@ -164,7 +170,6 @@ void PicCollectionSimulator::start() {
 }
 
 void PicCollectionSimulator::moveToNextImage() {
-  //m_ui->m_phoneWidget->setCurrentIndex(m_ui->m_phoneWidget->currentIndex() + 1);
   if (m_ui->m_phoneWidget->currentIndex() == m_ui->m_phoneWidget->count() - 1)
 	m_ui->m_phoneWidget->slideInIdx(3);
   else
@@ -172,7 +177,6 @@ void PicCollectionSimulator::moveToNextImage() {
 }
 
 void PicCollectionSimulator::moveToPreviousImage() {
-  //m_ui->m_phoneWidget->setCurrentIndex(m_ui->m_phoneWidget->currentIndex() - 1);
   if (m_ui->m_phoneWidget->currentIndex() == 3)
 	m_ui->m_phoneWidget->slideInIdx(m_ui->m_phoneWidget->count() - 1);
   else
