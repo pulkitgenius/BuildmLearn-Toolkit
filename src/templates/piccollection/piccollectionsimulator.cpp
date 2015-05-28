@@ -1,4 +1,4 @@
-/*PicCollection
+/*
   Copyright (c) 2015, BuildmLearn Contributors listed at http://buildmlearn.org/people/
   All rights reserved.
 
